@@ -1,0 +1,721 @@
+
+import java.awt.*;
+import java.awt.event.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+
+
+
+
+public class Editor1 extends WindowAdapter implements ActionListener,ItemListener{
+
+Frame f;
+TextArea ta;String cad;
+TextField tf,tf2,tf3;
+
+String tip="SanSerif";
+Button b0,b1,b2,b3,b4,b5,b8,b9,b10,b11,b13,b14,b15,b16,b17,b18,b20,b21,b22,b23,b24,b25,b26,b27,b28,b29,b30,b31,b32,b33,b34,b35,b36,b37;//Declaracion de variables
+Panel p,p2,p3,p4,p5,p6,p9,p10,p13,p14,p15,p16,p17,p18,p19,p20,p21;
+Choice tam,ti,cf;
+int es=0,t=12;
+String ruta;
+FileDialog fd;
+
+
+
+
+	public Editor1(){
+		f=new Frame ("Word Easy");
+		
+	
+		
+		b0=new Button("A");
+		b1=new Button("A");
+		b2=new Button("A");
+		b3=new Button("Nuevo");
+		b4=new Button("Abrir");
+		b5=new Button("Buscar");
+		b8=new Button("Copiar");
+		b9=new Button("Pegar");
+		b10=new Button("Guardar");
+		b11=new Button("Imprimir");
+		b13=new Button("Hipervinculo");
+		b14=new Button("Autocorreccion");
+		b15=new Button("Borrar");
+		b16=new Button("Izquierda");
+		b17=new Button("Centrado");
+		b18=new Button("Derecha");
+		b20=new Button ("Cortar");
+		b21=new Button ("Rosa");
+		b22=new Button ("Azul");
+		b23=new Button ("Verde");
+		b24=new Button ("Negro");
+		b25=new Button ("Cyan");
+		b26=new Button ("Gris Oscuro");
+		b27=new Button ("Magenta");
+		b28=new Button ("Naranja");
+		b29=new Button ("Rojo");
+		b30=new Button ("Blanco");
+		b31=new Button ("Amarrillo");
+		b32=new Button ("Gris");
+		b33=new Button ("");
+		b34=new Button ("");
+		b35=new Button ("");
+		b36=new Button ("");
+		b37=new Button ("");
+		
+		
+		p=new Panel();
+		p2=new Panel();
+		p3=new Panel();
+		p4= new Panel();
+		p5= new Panel();
+		p6= new Panel();
+		p9= new Panel();
+		p10= new Panel();
+		p13= new Panel();
+		p14= new Panel();
+		p15= new Panel();
+		p16= new Panel();
+		p17= new Panel();
+		p18= new Panel();
+		p20= new Panel();
+		p21= new Panel();		
+		
+		ta= new TextArea();
+		tam= new Choice ();
+		ti= new Choice ();
+		cf=new Choice ();
+		tf= new TextField ("Word Easy");
+		tf2= new TextField ("Buscar....");
+		
+		
+		
+		
+		b8.addActionListener(this);
+		b9.addActionListener(this);
+		tam.addItemListener(this);
+		cf.addItemListener(this);
+		ti.addItemListener(this);
+		b0.addActionListener(this);  
+		b1.addActionListener(this);
+		b2.addActionListener(this);
+		b15.addActionListener(this);
+	    b10.addActionListener(this);
+	    b3.addActionListener(this);
+	    b4.addActionListener(this);
+	    b20.addActionListener(this);
+	    b21.addActionListener(this);
+	    b22.addActionListener(this);
+	    b23.addActionListener(this);
+	    b24.addActionListener(this);
+	    b25.addActionListener(this);
+	    b26.addActionListener(this);
+	    b27.addActionListener(this);
+	    b28.addActionListener(this);
+	    b29.addActionListener(this);
+	    b30.addActionListener(this);
+	    b31.addActionListener(this);
+	    b32.addActionListener(this);
+	    b5.addActionListener(this);
+	    b33.addActionListener(this);
+	    b34.addActionListener(this);
+	    b35.addActionListener(this);
+	    b36.addActionListener(this);
+	    b37.addActionListener(this);
+	    
+
+f.addWindowListener(this);
+
+
+p.add(b3);
+p.add(b4);
+p.add(b10);
+p.add(b11);//botones en panel
+p.add(b15);
+
+p2.setLayout(new GridLayout(3,1));
+p5.setLayout(new GridLayout(15,1));
+p15.setLayout(new GridLayout(4,1));
+p14.setLayout(new GridLayout(4,1));
+p16.setLayout(new GridLayout(4,1));
+p17.setLayout(new GridLayout(4,1));
+//p19.setLayout(new GridLayout(2,2));
+
+
+
+
+p2.add(p);
+p2.add(p4);
+p2.add(p6);
+p2.add(p5);
+
+
+p5.add(ti);
+p5.add(tam);
+p5.add(b8);
+p5.add(b20);
+p5.add(b9);
+p5.add(b21);
+p5.add (p14);
+p5.add(cf);
+
+
+p3.add(tf);
+
+p4.add(b0);
+p4.add(b1);
+p4.add(b2);
+p4.add(b16);
+p4.add(b17);
+p4.add(b18);
+
+
+
+
+p6.add(b13);
+p6.add(b14);
+p6.add(tf2);
+p6.add(b5);
+
+
+
+
+
+p14.add(b24);
+p14.add(b26);
+p14.add(b22);
+p14.add(b29);
+
+p15.add(p14);
+p15.add(p16);
+p15.add(p17);
+
+p16.add(b23);
+p16.add(b27);
+p16.add(b21);
+p16.add(b28);
+
+
+
+p17.add(b31);
+p17.add(b25);
+p17.add(b32);
+p17.add(b30);
+
+p5.add(b33);
+p5.add(b34);
+p5.add(b35);
+p5.add(b36);
+p5.add(b37);
+
+p20.add(p21);
+
+
+tam.add("         12");
+tam.add("         16");
+tam.add("         20");
+tam.add("         22");
+tam.add("         24");
+tam.add("         26");
+tam.add("         28");
+tam.add("         30");
+tam.add("         32");
+tam.add("         34");
+tam.add("         36");
+tam.add("         38");
+tam.add("         40");
+tam.add("         42");
+tam.add("         46");
+tam.add("         48");
+tam.add("         100");
+
+ti.add("          abc");
+ti.add("     SanSerif");
+ti.add("     Serif");
+ti.add("     Monospaced");
+ti.add("     Dialog");
+
+cf.add("       Blanco");
+cf.add("       Negro");
+cf.add("       Azul");
+cf.add("       Gris");
+cf.add("       Rojo");
+cf.add("       Amarillo");
+cf.add("       Gris Oscuro");
+cf.add("       Verde");
+cf.add("       Magenta");
+cf.add("       Rosa");
+cf.add("       Naranja");
+cf.add("       Cyan");
+
+
+
+f.add (ta);
+f.setSize(600,600);
+f.setVisible(true);
+
+
+ta.setForeground(Color.black);
+
+
+f.add(p2,BorderLayout.NORTH);
+f.add(p5,BorderLayout.WEST);
+f.add(p3,BorderLayout.SOUTH);
+f.add(p15,BorderLayout.EAST);
+
+
+
+b0.setFont(new Font("bold",1,18));
+b1.setFont(new Font("italic",2,18));
+b2.setFont(new Font("plain",3,18));
+b3.setFont(new Font("plain",1,13));
+b4.setFont(new Font("plain",1,13));
+b8.setFont(new Font("plain",1,13));
+b9.setFont(new Font("plain",1,13));
+b10.setFont(new Font("plain",1,13));
+b11.setFont(new Font("plain",1,13));
+b13.setFont(new Font("plain",1,13));
+b14.setFont(new Font("plain",1,13));
+b15.setFont(new Font("plain",1,13));
+b16.setFont(new Font("plain",1,14));
+b17.setFont(new Font("plain",1,14));
+b18.setFont(new Font("plain",1,14));
+b20.setFont(new Font("plain",1,13));
+b21.setFont(new Font("plain",1,13));
+b22.setFont(new Font("plain",1,13));
+b23.setFont(new Font("plain",1,13));
+b24.setFont(new Font("plain",1,13));
+b25.setFont(new Font("plain",1,13));
+b26.setFont(new Font("plain",1,13));
+b27.setFont(new Font("plain",1,13));
+b28.setFont(new Font("plain",1,13));
+b29.setFont(new Font("plain",1,13));
+b30.setFont(new Font("plain",1,13));
+b31.setFont(new Font("plain",1,13));
+b32.setFont(new Font("plain",1,13));
+b5.setFont(new Font("plain",1,13));
+
+
+b3.setForeground(Color.black);
+b3.setBackground(Color.green);
+b4.setForeground(Color.black);
+b4.setBackground(Color.green);
+b8.setForeground(Color.black);
+b8.setBackground(Color.cyan);
+b9.setForeground(Color.black);
+b9.setBackground(Color.cyan);
+b10.setForeground(Color.black);
+b10.setBackground(Color.green);
+b11.setForeground(Color.black);
+b11.setBackground(Color.orange);
+b13.setForeground(Color.black);
+b13.setBackground(Color.orange);
+b14.setForeground(Color.black);
+b14.setBackground(Color.orange);
+b15.setForeground(Color.black);
+b15.setBackground(Color.red);
+b16.setForeground(Color.white);
+b16.setBackground(Color.blue);
+b17.setForeground(Color.white);
+b17.setBackground(Color.blue);
+b18.setForeground(Color.white);
+b18.setBackground(Color.blue);
+b20.setForeground(Color.black);
+b20.setBackground(Color.cyan);
+b21.setForeground(Color.black);
+b21.setBackground(Color.pink);
+b22.setForeground(Color.black);
+b22.setBackground(Color.blue);
+b23.setForeground(Color.black);
+b23.setBackground(Color.green);
+b24.setForeground(Color.white);
+b24.setBackground(Color.black);
+b25.setForeground(Color.black);
+b25.setBackground(Color.cyan);
+b26.setForeground(Color.black);
+b26.setBackground(Color.DARK_GRAY);
+b27.setForeground(Color.black);
+b27.setBackground(Color.magenta);
+b28.setForeground(Color.black);
+b28.setBackground(Color.orange);
+b29.setForeground(Color.black);
+b29.setBackground(Color.red);
+b30.setForeground(Color.black);
+b30.setBackground(Color.white);
+b31.setForeground(Color.black);
+b31.setBackground(Color.yellow);
+b32.setForeground(Color.black);
+b32.setBackground(Color.LIGHT_GRAY);
+b33.setBackground(Color.BLUE);
+b34.setBackground(Color.PINK);
+b35.setBackground(Color.GRAY);
+b36.setBackground(Color.WHITE);
+b37.setBackground(Color.black);
+tam.setBackground(Color.LIGHT_GRAY);
+ti.setBackground(Color.LIGHT_GRAY);
+tf2.setBackground(Color.LIGHT_GRAY);
+cf.setBackground(Color.LIGHT_GRAY);
+
+
+p.setBackground(Color.blue);
+p3.setBackground(Color.blue);
+p4.setBackground(Color.blue);
+p5.setBackground(Color.blue);
+p6.setBackground(Color.blue);
+p9.setBackground(Color.blue);
+p10.setBackground(Color.blue);
+p13.setBackground(Color.blue);
+p14.setBackground(Color.blue);
+p15.setBackground(Color.blue);
+p17.setBackground(Color.blue);
+p20.setBackground(Color.blue);
+p21.setBackground(Color.blue);
+tf.setBackground(Color.gray);
+tf.setForeground(Color.WHITE);
+tf.setFont(new Font("gray",3,16));
+
+}
+	 void copiaArchivo(){
+
+		 try { 
+		 ruta=fd.getDirectory()+fd.getFile();
+
+		 File outputFile = new File(ruta);
+		 FileOutputStream fos=new FileOutputStream(outputFile);
+
+		 DataOutputStream dos = new DataOutputStream(fos);
+
+		 dos.writeBytes(ta.getText()); dos.close(); } catch (FileNotFoundException e) {
+		 System.err.println("FileStreamsTest: " + e);
+		 } catch (IOException e) {
+		 System.err.println("FileStreamsTest: " + e);
+		 } 
+	 }
+		 void leerArchivo(){
+String c;
+			 try { 
+			 ruta=fd.getDirectory()+fd.getFile();
+
+			 File inputFile = new File(ruta);
+			 FileInputStream fos=new FileInputStream(inputFile);
+
+			 DataInputStream dos = new DataInputStream(fos);
+
+while ((c= dos.readLine()) != null)
+	
+	
+	ta.setText((ta.getText()+"\n"+c)); dos.close(); } catch (FileNotFoundException e) {
+			 System.err.println("FileStreamsTest: " + e);
+			 } catch (IOException e) {
+			 System.err.println("FileStreamsTest: " + e);
+			 } 
+	 }
+	 
+	public void actionPerformed (ActionEvent ae){
+		if (ae.getSource().equals(b8))
+			cad =ta.getSelectedText ();
+		else
+			
+			if (ae.getSource().equals(b20)){
+				cad =ta.getSelectedText ();
+				ta.replaceRange("", ta.getSelectionStart(), ta.getSelectionEnd());
+	  
+			}
+			
+	
+			if (ae.getSource().equals(b9))
+		ta.insert(cad,ta.getCaretPosition ());
+			else
+				
+		if (ae.getSource ().equals (b0))
+			es=1;
+	else
+		if (ae.getSource ().equals (b1))
+			es=2;
+		else
+			
+		if (ae.getSource ().equals (b2))
+			es=3;
+		
+		else
+		  if(ae.getSource().equals(b10)){
+			fd=new FileDialog(f,"Guarda como...",FileDialog.SAVE); 
+			fd.setVisible(true);
+			copiaArchivo();
+			}
+			
+		   if(ae.getSource().equals(b4)){
+			  fd=new FileDialog(f,"Abrir",FileDialog.LOAD); 
+			  fd.setVisible(true);
+			 
+			  leerArchivo();
+			  } 
+		   else if(ae.getSource().equals(b5)){
+				  fd=new FileDialog(f,"Abrir",FileDialog.LOAD); 
+				  fd.setVisible(true);
+
+				 
+				  leerArchivo();
+		   }
+		   
+		  else
+			  if(ae.getSource().equals(b3)){
+				fd=new FileDialog(f,"Guarda como...",FileDialog.SAVE); 
+				fd.setVisible(true);
+				copiaArchivo();
+				ta.setText("");}
+				
+		   
+		   
+		  else
+			  if (ae.getSource ().equals (b15)){
+			  ta.setText("");}
+	ta.setFont(new Font("",es,t));
+	System.out.println(ae.getActionCommand());
+	
+	
+		  if (ae.getSource ().equals (b21)){
+		  ta.setForeground(Color.pink);}
+ta.setFont(new Font("",es,t));
+System.out.println(ae.getActionCommand());
+	
+
+	if (ae.getSource ().equals (b22)){
+		  ta.setForeground(Color.blue);}
+	ta.setFont(new Font("",es,t));
+	System.out.println(ae.getActionCommand());
+	
+	if (ae.getSource ().equals (b23)){
+		  ta.setForeground(Color.green);}
+	ta.setFont(new Font("",es,t));
+	System.out.println(ae.getActionCommand());
+
+	if (ae.getSource ().equals (b24)){
+		  ta.setForeground(Color.black);}
+	ta.setFont(new Font("",es,t));
+	System.out.println(ae.getActionCommand());
+
+	
+	
+	if (ae.getSource ().equals (b25)){
+		  ta.setForeground(Color.cyan);}
+	ta.setFont(new Font("",es,t));
+	System.out.println(ae.getActionCommand());
+	
+
+	if (ae.getSource ().equals (b26)){
+		  ta.setForeground(Color.DARK_GRAY);}
+	ta.setFont(new Font("",es,t));
+	System.out.println(ae.getActionCommand());
+
+	
+
+	if (ae.getSource ().equals (b27)){
+		  ta.setForeground(Color.MAGENTA);}
+	ta.setFont(new Font("",es,t));
+	System.out.println(ae.getActionCommand());
+
+	
+
+	if (ae.getSource ().equals (b28)){
+		  ta.setForeground(Color.ORANGE);}
+	ta.setFont(new Font("",es,t));
+	System.out.println(ae.getActionCommand());
+
+	
+
+	if (ae.getSource ().equals (b29)){
+		  ta.setForeground(Color.RED);}
+	ta.setFont(new Font("",es,t));
+	System.out.println(ae.getActionCommand());
+
+	
+
+	if (ae.getSource ().equals (b30)){
+		  ta.setForeground(Color.WHITE);}
+	ta.setFont(new Font("",es,t));
+	System.out.println(ae.getActionCommand());
+
+	
+
+	if (ae.getSource ().equals (b31)){
+		  ta.setForeground(Color.YELLOW);
+		  }
+	ta.setFont(new Font("",es,t));
+	System.out.println(ae.getActionCommand());
+
+	
+
+	if (ae.getSource ().equals (b32)){
+		  ta.setForeground(Color.GRAY);}
+	ta.setFont(new Font("",es,t));
+	System.out.println(ae.getActionCommand());
+	
+
+	if (ae.getSource ().equals (b33)){
+		 p4.setBackground(Color.blue);
+		 p5.setBackground(Color.blue);
+		 p6.setBackground(Color.blue);
+		 p.setBackground(Color.blue);
+		 p15.setBackground(Color.blue);
+		 p3.setBackground(Color.blue);
+		 p17.setBackground(Color.blue);
+	}
+		 else 
+				if (ae.getSource ().equals (b34)){
+					 p4.setBackground(Color.pink);
+					 p5.setBackground(Color.pink);
+					 p6.setBackground(Color.pink);
+					 p.setBackground(Color.pink);
+					 p15.setBackground(Color.pink);
+					 p3.setBackground(Color.pink);
+					 p17.setBackground(Color.pink);
+		}
+				 else 
+						if (ae.getSource ().equals (b35)){
+							 p4.setBackground(Color.DARK_GRAY);
+							 p5.setBackground(Color.DARK_GRAY);
+							 p6.setBackground(Color.DARK_GRAY);
+							 p.setBackground(Color.DARK_GRAY);
+							 p15.setBackground(Color.DARK_GRAY);
+							 p3.setBackground(Color.DARK_GRAY);
+							 p17.setBackground(Color.DARK_GRAY);
+				}
+						 else 
+							if (ae.getSource ().equals (b36)){
+			     			 p4.setBackground(Color.WHITE);
+							 p5.setBackground(Color.WHITE);
+							 p6.setBackground(Color.WHITE);									
+							 p15.setBackground(Color.WHITE);
+							 p3.setBackground(Color.WHITE);
+							 p.setBackground(Color.WHITE);
+							 p17.setBackground(Color.WHITE);
+							}
+	
+							 else 
+							if (ae.getSource ().equals (b37)){
+				 			 p4.setBackground(Color.black);
+							 p5.setBackground(Color.black);
+							 p6.setBackground(Color.black);																	 p15.setBackground(Color.WHITE);
+							 p3.setBackground(Color.black);
+							 p.setBackground(Color.black);
+							 p17.setBackground(Color.black);
+							 p15.setBackground(Color.black);
+									}
+			
+	
+	
+	
+	ta.setFont(new Font("",es,t));
+	System.out.println(ae.getActionCommand());
+
+	}
+
+		public void itemStateChanged (ItemEvent e){
+			if(e.getItem() =="         12")
+			  t=12;
+			  else if(e.getItem() =="         16")
+			  t=16;
+			  else if(e.getItem() =="         20")
+			  t=20;
+			  else if(e.getItem() =="         22")
+				  t=22;
+			  else if(e.getItem() =="         24")
+				  t=24;
+			  else if(e.getItem() =="         26")
+				  t=26;
+			  else if(e.getItem() =="         28")
+				  t=28;
+			  else if(e.getItem() =="         30")
+				  t=30;
+			  else if(e.getItem() =="         32")
+				  t=32;
+			  else if(e.getItem() =="         34")
+				  t=34;
+			  else if(e.getItem() =="         36")
+				  t=36;
+			  else if(e.getItem() =="         38")
+				  t=38;
+			  else if(e.getItem() =="         40")
+				  t=40;
+			  else if(e.getItem() =="         42")
+				  t=42;
+			  else if(e.getItem() =="         46")
+				  t=46;
+			  else if(e.getItem() =="         48")
+				  t=48;
+			  else if(e.getItem() =="         100")
+				  t=200;
+			 ta.setFont(new Font(tip,es,t));
+			
+			 
+			 if  (e.getItem() == "     SanSerif")
+					tip= "SanSerif";
+				else if (e.getItem() == "     Serif")
+					tip= "Serif";
+				else if (e.getItem() == "     Monospaced")
+					tip= "Monospaced";
+				else if (e.getItem() == "      Dialog")
+					tip= "Dialog";
+			 
+					ta.setFont(new Font("",es,t));
+					
+					
+					
+					 if (e.getItem() == "       Rojo")
+						 ta.setBackground(Color.red);
+					 
+					 
+					 else if (e.getItem() == "       Negro")
+						 ta.setBackground(Color.black);
+					 
+					 else if (e.getItem() == "       Blanco")
+						 ta.setBackground(Color.white);
+					 
+					 else if (e.getItem() == "       Azul")
+						 ta.setBackground(Color.blue);
+					 
+					 else if (e.getItem() == "       Amarillo")
+						 ta.setBackground(Color.YELLOW);
+					 
+					 else if (e.getItem() == "       Gris")
+						 ta.setBackground(Color.GRAY);
+							
+					 else if (e.getItem() == "       Gris Oscuro")
+						 ta.setBackground(Color.DARK_GRAY);
+					 
+					 else if (e.getItem() == "       Verde")
+						 ta.setBackground(Color.green);
+					 
+					 else if (e.getItem() == "       Magenta")
+						 ta.setBackground(Color.magenta);
+					 
+					 else if (e.getItem() == "       Rosa")
+						 ta.setBackground(Color.pink);
+					 
+					 else if (e.getItem() == "       Naranja")
+						 ta.setBackground(Color.orange);
+					 
+					 else if (e.getItem() == "       Cyan")
+						 ta.setBackground(Color.cyan);
+						
+							ta.setFont(new Font(tip,es,t));
+					
+		}
+	
+		
+		public void windowClosing(WindowEvent e){
+			System.exit(0);
+		}
+	public static void main (String  []args){
+		new Editor1();
+	}
+
+}
